@@ -18,10 +18,10 @@ const Formulario = ({ addAlert, setData, data, setDataFilter, dataFilter }) => {
 
   const validarDatos = () => {
     const { nombre, correo, edad, cargo, telefono } = datosColaborador;
-    const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
+    const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const regexTelef = /^[0-9]{9}$/;
 
-    if (!nombre.trim()  !correo  !edad  !cargo.trim()  !telefono) {
+    if (!nombre.trim() || !correo || !edad || !cargo.trim() || !telefono) {
       return 'Debes completar todos los campos';
     } else if (!regexEmail.test(correo)) {
       return 'Correo electrónico no válido';
@@ -30,7 +30,8 @@ const Formulario = ({ addAlert, setData, data, setDataFilter, dataFilter }) => {
     }
     return '';
   };
-const handleSubmit = (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const mensajeError = validarDatos();
 
@@ -47,7 +48,9 @@ const handleSubmit = (e) => {
 
       setDatosColaborador({ nombre: '', correo: '', edad: '', cargo: '', telefono: '' });
     }
-  };useEffect(() => {
+  };
+
+  useEffect(() => {
     setDatosColaborador({ nombre: '', correo: '', edad: '', cargo: '', telefono: '' });
   }, [data]);
 
@@ -63,8 +66,8 @@ const handleSubmit = (e) => {
               type={key === 'correo' ? 'email' : 'text'}
               className="form-control"
               name={key}
-              id={input${key.charAt(0).toUpperCase() + key.slice(1)}}
-              placeholder={${key.charAt(0).toUpperCase() + key.slice(1)} del colaborador}
+              id={`input${key.charAt(0).toUpperCase() + key.slice(1)}`}
+              placeholder={`${key.charAt(0).toUpperCase() + key.slice(1)} del colaborador`}
             />
           </div>
         ))}
