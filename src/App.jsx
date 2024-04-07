@@ -1,25 +1,54 @@
-import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Listado from "./Componentes/listado";
-import { BaseColaboradores } from "./assets/BaseColaboradores";
-export default function App() {
-  const [Colaboradores, setColaboradores] = useState(BaseColaboradores);
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
+import { BaseColaboradores } from './BaseColaboradores';
+import Buscador from './components/Buscador';
+import Listado from './components/Listado';
+import Formulario from './components/Formulario';
+import Alert from './components/Alert';
+import { useState } from 'react';
+
+function App() {
+  const [baseColaboradores, setBaseColaboradores] = useState(BaseColaboradores);
+  const [colaboradoresFiltrado, setColaboradoresFiltrado] =
+    useState(baseColaboradores);
+
+  const [alert, setAlert] = useState({
+    texto: '',
+    tipo: '',
+    estado: false,
+  });
+
+  const addAlert = (newAlert) => {
+    setAlert(newAlert);
+  };
+
   return (
-    <div className="mx-4">
-      <h1 className="text-start">Lista de Colaboradores</h1>
-      <Row>
-        <Col sm={4}></Col>
-      </Row>
-      <Row>
-        <Col sm={12} md={9}>
-          <Listado Colaboradores={Colaboradores} />
-        </Col>
-        <Col md={3} className="">
-          <h2>Agregar Colaborador</h2>
-        </Col>
-      </Row>
-    </div>
+    <>
+      <h1 className="my-4"><i class="fa-solid fa-user-group"></i> Lista de Colaboradores</h1>
+      <Buscador
+        data={baseColaboradores}
+        dataFilter={setColaboradoresFiltrado}
+      />
+      <div className="row row-cols-2 justify-content-end m-0">
+        <Listado
+          data={baseColaboradores}
+          setData={setBaseColaboradores}
+          dataFilter={colaboradoresFiltrado}
+          setDataFilter={setColaboradoresFiltrado}
+        />
+        <Formulario
+          className="formulario"
+          addAlert={addAlert}
+          data={baseColaboradores}
+          setData={setBaseColaboradores}
+          dataFilter={colaboradoresFiltrado}
+          setDataFilter={setColaboradoresFiltrado}
+        />
+        <Alert className="alert" alerta={alert} />
+      </div>
+    </>
   );
 }
+
+export default App;
