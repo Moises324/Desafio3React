@@ -1,11 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import { BaseColaboradores } from './BaseColaboradores';
-import Buscador from './components/Buscador';
-import Listado from './components/Listado';
-import Formulario from './components/Formulario';
-import Alert from './components/Alert';
+import { BaseColaboradores } from './assets/BaseColaboradores';
+import Buscador from './Components/Buscador';
+import Listado from './Components/Listado';
+import Formulario from './Components/Formulario';
+import Alert from './Components/Alert';
 import { useState } from 'react';
 
 function App() {
